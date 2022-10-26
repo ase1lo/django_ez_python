@@ -17,6 +17,11 @@ def get_all_topics(request):
         'allowed_viewer': allowed_viewer,
         })
 
+
+def blog_home(request):
+    return render(request, 'blog/blog_home.html')
+    
+
 def get_topics_by_category(request, category):
     #Electronics
     try:
