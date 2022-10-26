@@ -1,21 +1,36 @@
-from unicodedata import category
+from django.views.generic import ListView, DetailView
 from django.shortcuts import render
-from .models import Category, Topic
+from .models import Category, Topic, Genre
 from django.contrib.auth.models import User
+
 
 
 # Create your views here.
 
-def get_all_topics(request):
-    all_topics = Topic.objects.all()
-    allowed_viewer = User.objects.get(pk=1)
+class TopicListView(ListView):
+    model = Topic
+    context_object_name = 'all_topics'
+    template_name = 'blog/all_topics.html'
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['allowed_viewer'] = User.objects.get(pk=1)
+        data['all_genres'] = Genre.objects.all()
+        return data
+    
+
+
+# def get_all_topics(request):
+#     all_topics = Topic.objects.all()
+#     allowed_viewer = User.objects.get(pk=1)
 
 
 
-    return render(request, 'blog/all_topics.html', {
-        'all_topics': all_topics,
-        'allowed_viewer': allowed_viewer,
-        })
+#     return render(request, 'blog/all_topics.html', {
+#         'all_topics': all_topics,
+#         'allowed_viewer': allowed_viewer,
+#         })
+
+
 
 
 def blog_home(request):
