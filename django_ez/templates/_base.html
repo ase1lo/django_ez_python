@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Django_ez</title>
+  <title>Django_ez_python</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
@@ -14,9 +14,20 @@
 <body>
   {% include "header.html" %}
   <p></p>
-  <div class="container-sm">
-    {% block content %}
-    {% endblock %}
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+          <div class="col"></div>
+  
+          <div class="col-8">
+            {% block content %}
+            {% endblock %}
+          </div>
+  
+          <div class="col"></div>
+      </div>
+  </div>
+    
   </div>
 </body>
 

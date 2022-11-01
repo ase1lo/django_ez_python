@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView
 from django.shortcuts import render
-from .models import Category, Topic, Genre
+from .models import Author, Category, Topic, Genre
 from django.contrib.auth.models import User
 
 
@@ -11,6 +11,7 @@ class TopicListView(ListView):
     model = Topic
     context_object_name = 'all_topics'
     template_name = 'blog/all_topics.html'
+
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         data['allowed_viewer'] = User.objects.get(pk=1)
@@ -18,18 +19,18 @@ class TopicListView(ListView):
         return data
     
 
+class AuthorDetailView(DetailView):
+    model = Author
+    template_name = 'author/author_detail.html'
+    context_object_name = 'author'
 
-# def get_all_topics(request):
-#     all_topics = Topic.objects.all()
-#     allowed_viewer = User.objects.get(pk=1)
 
-
-
-#     return render(request, 'blog/all_topics.html', {
-#         'all_topics': all_topics,
-#         'allowed_viewer': allowed_viewer,
-#         })
-
+# def author_profile(request, author_id):
+#     try:
+#         author = Author.objects.get(pk=author_id)
+#     except:
+#         author = None
+#     return render(request, 'author/author_detail.html', {'author': author})
 
 
 
