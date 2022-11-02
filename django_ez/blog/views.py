@@ -1,11 +1,16 @@
-from django.views.generic import ListView, DetailView
+
+
+from .forms import RegisterUserForm
+from django.views.generic import ListView, DetailView, CreateView
 from django.shortcuts import render
 from .models import Author, Category, Topic, Genre
 from django.contrib.auth.models import User
+from django.urls import reverse_lazy
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 
 
-# Create your views here.
 
 class TopicListView(ListView):
     model = Topic
@@ -47,6 +52,27 @@ def get_topics_by_category(request, category):
         {'topics_by_category': topics_by_category})
     except: # aboba
         return render(request, 'blog/wrong_category.html')
+
+
+
+class RegisterUser(CreateView):
+    form_class = RegisterUserForm #модель формы forms.py
+    template_name = 'auth/register.html'
+    success_url = '/blog'
+
+
+class LoginUser(LoginView):
+    form_class = AuthenticationForm
+    template_name = 'auth/login.html'
+
+    def get_success_url(self):
+        return reverse_lazy('blog_home')   #переадресация
+
+
+
+
+
+
 
 # python manage.py shell
 #Author.object.all() - все авторы
