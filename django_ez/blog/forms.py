@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from .models import Author
 
 
 class RegisterUserForm(UserCreationForm):
@@ -17,3 +18,9 @@ class RegisterUserForm(UserCreationForm):
             'password2': forms.PasswordInput(attrs={'class': 'form-input'}),
         }
     
+
+
+class AuthorForm(forms.ModelForm):
+    class Meta:
+        model = Author
+        exclude = []
