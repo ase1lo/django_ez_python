@@ -1,0 +1,43 @@
+{% extends '_base.html' %}
+
+{% block content %}
+
+
+
+<div class="row">
+    <div class="col-3">
+        <a href="/blog/author/{{ topic.author.id }}" class="btn btn-primary">{{ topic.author }}</a>
+        <br>
+        <p></p>
+        <a href="/blog/topics_by_category/{{ topic.category }}" class="btn btn-primary">{{ topic.category }}</a>
+    </div>
+    <div class="col-6"><h1>{{ topic.title }}</h1></div>
+    <div class="col-3"></div>
+</div>
+<div class="row">
+    <div class="col"></div>
+    <div class="col-10"><p class="card-text">{{ topic.content }}</p></div>
+    <div class="col"></div>
+</div>
+<div class="row">
+    {% if topic.photo %}
+    <img src="{{ topic.photo.url }}" class="img-thumbnail" alt="...">
+    {% endif %}
+</div>
+
+
+
+            
+            
+
+            
+ 
+
+
+
+
+
+
+
+
+{% endblock %}

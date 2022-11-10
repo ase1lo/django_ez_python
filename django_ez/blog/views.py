@@ -61,6 +61,12 @@ class TopicByCategory(ListView):
         return data
 
 
+class TopicDetailView(DetailView):
+    model = Topic
+    template_name = 'topic/topic_detail.html'
+    context_object_name = 'topic'
+
+
 def blog_home(request):
     return render(request, 'blog/blog_home.html')
     
