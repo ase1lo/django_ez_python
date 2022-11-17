@@ -1,7 +1,7 @@
 
 
 from .forms import RegisterUserForm
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.shortcuts import render
 from .models import Author, Category, Topic, Genre
 from django.contrib.auth.models import User
@@ -11,6 +11,17 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.http import Http404
 
 
+class AuthorDeleteView(DeleteView):
+    model = Author
+    template_name = 'author/author_confirm_delete.html'
+    success_url = reverse_lazy('blog_home')
+
+
+class AuthorUpdateView(UpdateView):
+    model = Author
+    fields = ['name', 'nickname', 'genre', 'country', 'birthday',]
+    template_name = 'author/author_form.html'
+
 
 class AuthorCreateView(CreateView): #как создать что-то с сайта
     model = Author
@@ -19,10 +30,27 @@ class AuthorCreateView(CreateView): #как создать что-то с сай
 
 
 
+class CategoryDeleteView(DeleteView):
+    model = Category
+    template_name = 'category/category_confirm_delete.html'
+    success_url = reverse_lazy('blog_home')
+
+
+class CategoryUpdateView(UpdateView):
+    model = Category
+    fields = ['title',]
+    template_name = 'category/category_form.html'
+
 class CategoryCreateView(CreateView):
     model = Category
     fields = ['title',]
     template_name = 'category/category_form.html'
+
+class CategoryDetailView(DetailView):
+    model = Category
+    template_name = 'category/category_detail.html'
+    context_object_name = 'category'
+
 
 
 class TopicListView(ListView): # ListView - objecst.all() objects.filter() - queryset
