@@ -12,6 +12,19 @@ from django.http import Http404
 
 
 
+class AuthorCreateView(CreateView): #как создать что-то с сайта
+    model = Author
+    fields = ['name', 'nickname', 'genre', 'country', 'birthday',]
+    template_name = 'author/author_form.html'
+
+
+
+class CategoryCreateView(CreateView):
+    model = Category
+    fields = ['title',]
+    template_name = 'category/category_form.html'
+
+
 class TopicListView(ListView): # ListView - objecst.all() objects.filter() - queryset
     model = Topic
     context_object_name = 'all_topics'
@@ -47,7 +60,6 @@ class TopicByCategory(ListView):
     context_object_name = "topics_by_category"
 
     def get(self, request, *args, **kwargs): # blog/topic_byt_category/Python - Python (конец url) - получаем из
-        print(kwargs)
         request_category = kwargs['category']  # из метода get 
         try:
             self.category_id = Category.objects.get(title=request_category).id
